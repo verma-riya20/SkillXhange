@@ -4,7 +4,7 @@ import { FaClock, FaTabletAlt, FaChartPie, FaFacebookF, FaInstagram, FaLinkedinI
 
 const fadeInVariants = {
   hidden: { opacity: 0, y: 50 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } },
 };
 
 const sectionVariants = {
@@ -47,7 +47,7 @@ const EasyStudyHome = () => {
       <motion.section
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: false, amount: 0.3 }}
+        viewport={{ once: true, amount: 0.3 }}
         variants={sectionVariants}
         className="bg-gradient-to-b from-[#1c637b] via-[#e2b091] to-[#f9f1e9] min-h-screen flex items-center"
       >
@@ -63,11 +63,11 @@ const EasyStudyHome = () => {
               Learn What You Need, Teach What You Know.
             </p>
             <div className="flex gap-4 mb-6">
-              <button className="px-6 py-3 rounded-full bg-slate-950 text-white font-semibold shadow-lg hover:scale-105 transition-transform">
-                GET STARTED
-              </button>
-              
-              
+              <a href="/registertutor">
+                <button className="px-6 py-3 rounded-full bg-slate-950 text-white font-semibold shadow-lg hover:scale-105 transition-transform">
+                  GET STARTED
+                </button>
+              </a>
             </div>
           </div>
 
@@ -81,37 +81,32 @@ const EasyStudyHome = () => {
       <motion.section
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: false, amount: 0.3 }}
+        viewport={{ once: true, amount: 0.3 }}
         variants={sectionVariants}
         className="bg-[#f9f1e9] py-20"
       >
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
           <div className="flex justify-center">
-           
           </div>
           <div>
             <h2 className="text-3xl font-semibold text-[#1e5e75] mb-8">Why Choose SkillXchange?</h2>
             <div className="space-y-6 text-[#1e5e75]">
-              {[
-                {
-                  title: "Connect with Top-Rated Tutors",
-                  desc: "Choose from a wide selection of verified tutors based on skills, reviews, and ratings. Learn exactly what you need, when you need it."
-                },
-                {
-                  title: "Chat, Schedule & Pay — All in One Place",
-                  desc: "No more juggling platforms. Use our built-in chat and scheduling system to arrange meetings and pay securely through our portal."
-                },
-                {
-                  title: "Buy, Sell or Lend Books Easily",
-                  desc: "Whether you're looking to sell your old semester books or borrow a novel, our book exchange tab keeps learning affordable and circular."
-                },
-              ].map((feature, i) => (
-                <div key={i}>
+              {[{
+                title: "Connect with Top-Rated Tutors",
+                desc: "Choose from a wide selection of verified tutors based on skills, reviews, and ratings. Learn exactly what you need, when you need it."
+              }, {
+                title: "Chat, Schedule & Pay — All in One Place",
+                desc: "No more juggling platforms. Use our built-in chat and scheduling system to arrange meetings and pay securely through our portal."
+              }, {
+                title: "Buy, Sell or Lend Books Easily",
+                desc: "Whether you're looking to sell your old semester books or borrow a novel, our book exchange tab keeps learning affordable and circular."
+              }].map((feature, i) => (
+                <div key={i} className="bg-white p-4 rounded-xl shadow-md">
                   <h3 className="font-bold text-lg flex items-center gap-2">
                     <span className="bg-blue-200 text-blue-800 rounded-full px-3 py-1 text-sm">{`0${i + 1}`}</span>
                     {feature.title}
                   </h3>
-                  <p className="text-sm text-gray-700">{feature.desc}</p>
+                  <p className="text-sm text-gray-700 mt-2">{feature.desc}</p>
                 </div>
               ))}
             </div>
@@ -133,7 +128,10 @@ const EasyStudyHome = () => {
                 key={index}
                 className={`${course.bgColor} rounded-[24px] px-8 py-10 min-h-[320px] shadow-xl hover:scale-105 transition-transform`}
                 whileHover={{ y: -4 }}
-                transition={{ type: 'spring', stiffness: 200 }}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, ease: 'easeOut' }}
               >
                 <p className="text-sm text-gray-600 font-semibold uppercase mb-2">{course.category}</p>
                 <h3 className="text-lg font-semibold text-black">{course.title}</h3>
@@ -148,7 +146,7 @@ const EasyStudyHome = () => {
       </section>
 
       {/* Contact & Footer Section */}
-      <section className="bg-gradient-to-t from-[#fef1ed] to-[#d6a886] px-4 pt-20 pb-12 rounded-t-[50px]">
+      <section className="bg-gradient-to-t from-[#fef1ed] to-[#d6a886] px-4 pt-20 pb-12 ">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <div>
             <h2 className="text-3xl md:text-4xl font-semibold text-[#1e5e75] mb-4">Still have questions?</h2>
@@ -172,14 +170,14 @@ const EasyStudyHome = () => {
           <div className="col-span-1">ABOUT<br />PROGRAM</div>
           <div className="col-span-1">COURSES<br />REVIEWS</div>
           <div className="col-span-1">
-            support@skillxchange.com<br />Delhi, India
+            <a href="mailto:support@skillxchange.com" className="hover:text-[#1e5e75]">support@skillxchange.com</a><br />Delhi, India
           </div>
           <div className="col-span-1">
-            +91 9876543210
+            <a href="tel:+919876543210" className="hover:text-[#1e5e75]">+91 9876543210</a>
             <div className="flex gap-2 mt-2">
-              <FaFacebookF className="hover:text-[#1e5e75]" />
-              <FaInstagram className="hover:text-[#1e5e75]" />
-              <FaLinkedinIn className="hover:text-[#1e5e75]" />
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><FaFacebookF className="hover:text-[#1e5e75]" /></a>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><FaInstagram className="hover:text-[#1e5e75]" /></a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><FaLinkedinIn className="hover:text-[#1e5e75]" /></a>
             </div>
           </div>
         </footer>
