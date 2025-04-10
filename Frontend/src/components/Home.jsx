@@ -67,14 +67,12 @@ const EasyStudyHome = () => {
                 GET STARTED
               </button>
               
-              <button className="px-6 py-3 rounded-full bg-slate-950 text-white font-semibold shadow-lg hover:scale-105 transition-transform">
-                REGISTER AS A TUTOR
-              </button>
+              
             </div>
           </div>
 
           <div className="w-full flex justify-center">
-            <img src="/image.png" alt="Hero Illustration" className="max-w-sm w-full" />
+            <img src="../images/image.png" alt="Hero Illustration" className="max-w-sm w-full" />
           </div>
         </motion.div>
       </motion.section>

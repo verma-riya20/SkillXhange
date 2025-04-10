@@ -1,12 +1,18 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { InstructorContext } from "../context.jsx/InstructorContext";
 
 const RegisterTutor = () => {
+  const { setInstructors } = useContext(InstructorContext);
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
     phone: "",
     institution: "",
-    skills: " ",
+    skills: "",
     expertise: "",
     whyTutor: "",
     resume: null,
@@ -23,8 +29,16 @@ const RegisterTutor = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form Submitted:", formData);
-    // Add form submission logic here
+    const newInstructor = {
+      name: formData.fullName,
+      title: formData.expertise,
+      image: "https://via.placeholder.com/150", // placeholder or upload logic
+      skills: formData.skills.split(",").map(s => s.trim()),
+      rating: 5.0,
+      reviews: 0,
+    };
+    setInstructors(prev => [newInstructor, ...prev]);
+    navigate("/instructor");
   };
 
   return (
