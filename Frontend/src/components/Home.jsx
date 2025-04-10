@@ -56,9 +56,10 @@ const EasyStudyHome = () => {
           className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 py-20 items-center"
         >
           <div className="text-white">
-            <h1 className="text-4xl md:text-6xl font-semibold leading-tight mb-6 text-slate-950">
-              SkillXchange<br />Where Students Uplift Students.
-            </h1>
+          <h1 className="text-4xl md:text-6xl font-semibold leading-tight mb-6 text-slate-950">
+  <span className="font-chewy">SkillXchange</span><br />
+  <span className="typewriter text-white font-chewy text-xl">Where Students Uplift Students.</span>
+</h1>
             <p className="text-lg max-w-md mb-6">
               Learn What You Need, Teach What You Know.
             </p>
@@ -71,8 +72,8 @@ const EasyStudyHome = () => {
             </div>
           </div>
 
-          <div className="w-full flex justify-center">
-            <img src="../images/image.png" alt="Hero Illustration" className="max-w-sm w-full" />
+          <div className="min-w-96 flex justify-center w-full ">
+            <img src="../images/image2.png" alt="Hero Illustration" className="max-w-sm w-full" />
           </div>
         </motion.div>
       </motion.section>
