@@ -6,6 +6,7 @@ import Services from './components/Services';
 import TutorProfile from './components/Tutorprofile';
 import Instructor from './components/Instructor';
 import RegisterTutor from './components/RegisterTutor';
+import BookStorePage from './components/BookStorePage';
 import Books from './components/Books';
 
 
@@ -19,7 +20,6 @@ function App() {
         <Route path="/tutorprofile" element={<TutorProfile />} />
         <Route path="/instructor" element={<Instructor />} />
         <Route path="/register-tutor" element={<RegisterTutor />} />
-        <Route path="/books" element={<Books />} />
       </Routes>
     </>
   )
