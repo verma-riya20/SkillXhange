@@ -66,7 +66,7 @@ const EasyStudyHome = () => {
         >
           <div className="text-white text-2xl font-bold">Circle</div>
          
-          <button className="px-5 py-2 rounded-full bg-white text-black font-semibold hover:bg-gray-200">SIGN IN</button>
+          
         </motion.header>
 
         <motion.div
