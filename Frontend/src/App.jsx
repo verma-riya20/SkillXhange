@@ -9,6 +9,7 @@ import RegisterTutor from './components/RegisterTutor';
 import BookStorePage from './components/BookStorePage';
 import Books from './components/Books';
 import AddBook from './components/AddBook';
+import AboutPage from './components/About';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path="/instructor" element={<Instructor />} />
         <Route path="/register-tutor" element={<RegisterTutor />} />
         <Route path="/addbook" element={<AddBook />} />
+        <Route path="/about" element={<AboutPage />} />
       </Routes>
     </>
   )
