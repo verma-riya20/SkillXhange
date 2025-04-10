@@ -44,14 +44,7 @@ const InstructorsPage = () => {
         <p className="text-lg max-w-2xl mx-auto mb-8">
           Build skills with courses, certifications, and degrees online from world-class instructors and companies.
         </p>
-        <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <button className="bg-[#6C63FF] hover:bg-indigo-600 text-white px-6 py-3 rounded-full font-semibold shadow-lg transition">
-            Join for Free
-          </button>
-          <button className="border border-white hover:bg-white hover:text-[#12033e] px-6 py-3 rounded-full font-semibold transition">
-            Find Courses
-          </button>
-        </div>
+        
       </div>
 
       {/* Instructors Section */}
