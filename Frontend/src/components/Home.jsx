@@ -65,12 +65,7 @@ const EasyStudyHome = () => {
           className="max-w-7xl mx-auto px-6 py-8 flex items-center justify-between"
         >
           <div className="text-white text-2xl font-bold">Circle</div>
-          <nav className="hidden md:flex space-x-8 text-white font-medium">
-            <a href="#" className="hover:underline">ABOUT</a>
-            <a href="#" className="hover:underline">PROGRAM</a>
-            <a href="#" className="hover:underline">COURSES</a>
-            <a href="#" className="hover:underline">REVIEWS</a>
-          </nav>
+         
           <button className="px-5 py-2 rounded-full bg-white text-black font-semibold hover:bg-gray-200">SIGN IN</button>
         </motion.header>
 
