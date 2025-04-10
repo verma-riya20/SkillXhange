@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X, User, Sun, Moon } from 'lucide-react';
-import logo from '/logo.png';
+// Adjust the path to your logo image
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,7 +25,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link to="/">
-            <img src={logo} alt="SkillXchange Logo" className="h-10 w-auto" />
+            <img src= '../assets/logo-SkillXhange.png' alt="SkillXchange Logo" className="h-10 w-auto" />
           </Link>
 
           <div className="hidden md:flex space-x-8 text-white font-medium">
