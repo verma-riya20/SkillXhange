@@ -8,6 +8,7 @@ import Instructor from './components/Instructor';
 import RegisterTutor from './components/RegisterTutor';
 import BookStorePage from './components/BookStorePage';
 import Books from './components/Books';
+import AddBook from './components/AddBook';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/tutorprofile" element={<TutorProfile />} />
         <Route path="/instructor" element={<Instructor />} />
         <Route path="/register-tutor" element={<RegisterTutor />} />
+        <Route path="/addbook" element={<AddBook />} />
         <Route path="/books" element={<Books />} />
         <Route path="/bookstore" element={<BookStorePage />} />
       </Routes>
