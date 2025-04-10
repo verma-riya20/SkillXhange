@@ -23,6 +23,8 @@ function App() {
         <Route path="/instructor" element={<Instructor />} />
         <Route path="/register-tutor" element={<RegisterTutor />} />
         <Route path="/addbook" element={<AddBook />} />
+        <Route path="/books" element={<Books />} />
+        <Route path="/bookstore" element={<BookStorePage />} />
         <Route path="/about" element={<AboutPage />} />
       </Routes>
     </>

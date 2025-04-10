@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import BookstorePage from "./BookStorePage";
 
 const Books = () => {
   return (
@@ -29,6 +30,7 @@ const Books = () => {
           A student-powered book exchange platform that saves money, reduces waste, and keeps learning accessible.
         </motion.p>
         <motion.button
+         onClick={() => window.location.href = "/bookstore"}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.97 }}
           className="px-6 py-3 bg-white text-black font-semibold rounded-full shadow-md transition"
