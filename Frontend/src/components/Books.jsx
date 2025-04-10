@@ -6,7 +6,7 @@ const Books = () => {
   return (
     <div
       className="relative h-screen w-full bg-cover bg-center"
-      style={{ backgroundImage: "url('/public/images/book.webp')" }}
+      style={{ backgroundImage: "url('/images/book.webp')" }}
     >
       {/* Overlay */}
       <div className="absolute inset-0 bg-black bg-opacity-60 "></div>
