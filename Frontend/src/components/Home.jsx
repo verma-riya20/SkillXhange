@@ -64,7 +64,6 @@ const EasyStudyHome = () => {
           variants={fadeInVariants}
           className="max-w-7xl mx-auto px-6 py-8 flex items-center justify-between"
         >
-          <div className="text-white text-2xl font-bold">Circle</div>
          
           
         </motion.header>
