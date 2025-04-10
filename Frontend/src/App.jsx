@@ -5,6 +5,7 @@ import Home from './components/Home';
 import Services from './components/Services';
 import TutorProfile from './components/Tutorprofile';
 import Instructor from './components/Instructor';
+import RegisterTutor from './components/RegisterTutor';
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route path="/services" element={<Services />} />
         <Route path="/tutorprofile" element={<TutorProfile />} />
         <Route path="/instructor" element={<Instructor />} />
+        <Route path="/register-tutor" element={<RegisterTutor />} />
       </Routes>
     </>
   )

@@ -66,6 +66,7 @@ const EasyStudyHome = () => {
               <button className="px-6 py-3 rounded-full bg-slate-950 text-white font-semibold shadow-lg hover:scale-105 transition-transform">
                 GET STARTED
               </button>
+              
               <button className="px-6 py-3 rounded-full bg-slate-950 text-white font-semibold shadow-lg hover:scale-105 transition-transform">
                 REGISTER AS A TUTOR
               </button>
