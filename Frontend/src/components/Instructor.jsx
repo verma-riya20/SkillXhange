@@ -1,35 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import { InstructorProvider } from "../context.jsx/InstructorContext";
+import { useContext } from "react";
+import { InstructorContext } from "../context.jsx/InstructorContext";
+import { useEffect } from "react";
 
-// Sample instructors (replace with real data or map from backend)
-const instructors = [
-  {
-    name: "John Doe",
-    title: "Full Stack Developer",
-    image: "/instructors/john.jpg",
-    skills: ["React", "Node.js", "MongoDB"],
-    rating: 4.8,
-    reviews: 120,
-  },
-  {
-    name: "Jane Smith",
-    title: "UI/UX Designer",
-    image: "/instructors/jane.jpg",
-    skills: ["Figma", "Sketch", "Adobe XD"],
-    rating: 4.6,
-    reviews: 85,
-  },
-  {
-    name: "Ravi Kumar",
-    title: "SEO Specialist",
-    image: "/instructors/ravi.jpg",
-    skills: ["SEO", "Google Analytics", "Content Strategy"],
-    rating: 4.9,
-    reviews: 143,
-  },
-];
+
 
 const InstructorsPage = () => {
+    const { instructors } = useContext(InstructorContext);
+    const [sortBy, setSortBy] = useState("");
+    const [searchTerm, setSearchTerm] = useState("");
+    const navigate = useNavigate();
+  
+    const sortInstructors = (list) => {
+      switch (sortBy) {
+        case "rating":
+          return [...list].sort((a, b) => b.rating - a.rating);
+        case "popularity":
+          return [...list].sort((a, b) => b.reviews - a.reviews);
+        case "alphabetical":
+          return [...list].sort((a, b) => a.name.localeCompare(b.name));
+        default:
+          return list;
+      }
+    };
+  
+    const filteredInstructors = sortInstructors(
+      instructors.filter((inst) =>
+        inst.skills.some((skill) =>
+          skill.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+      )
+    );
   return (
     <div className="bg-white">
       {/* Hero Section */}
@@ -52,11 +56,41 @@ const InstructorsPage = () => {
 
       {/* Instructors Section */}
       <section className="max-w-7xl mx-auto px-6 py-20">
-        <h2 className="text-3xl font-semibold text-center mb-12 text-[#12033e]">
-          Meet Our Top Instructors
-        </h2>
+        <div className="flex flex-col sm:flex-row justify-between items-center mb-10 gap-4">
+          <h2 className="text-3xl font-semibold text-[#12033e] text-center sm:text-left">
+            Meet Our Top Instructors
+          </h2>
+
+          <div className="flex flex-col sm:flex-row gap-4 items-center">
+            <input
+              type="text"
+              placeholder="Search by skill..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="border px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            />
+
+            <select
+              onChange={(e) => setSortBy(e.target.value)}
+              className="border px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-400"
+            >
+              <option value="">Sort By</option>
+              <option value="rating">Rating (High to Low)</option>
+              <option value="popularity">Popularity</option>
+              <option value="alphabetical">Alphabetical (A-Z)</option>
+            </select>
+
+            <button
+              onClick={() => navigate("/register-tutor")}
+              className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition"
+            >
+              Register as Instructor
+            </button>
+          </div>
+        </div>
+
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {instructors.map((inst, idx) => (
+          {filteredInstructors.map((inst, idx) => (
             <div
               key={idx}
               className="bg-white shadow-xl rounded-2xl p-6 text-center hover:shadow-2xl transition duration-300"
@@ -87,7 +121,9 @@ const InstructorsPage = () => {
                     className={i < Math.round(inst.rating) ? "text-yellow-400" : "text-gray-300"}
                   />
                 ))}
-                <span className="text-sm text-gray-600 ml-2">({inst.reviews} reviews)</span>
+                <span className="text-sm text-gray-600 ml-2">
+                  ({inst.reviews} reviews)
+                </span>
               </div>
             </div>
           ))}
