@@ -40,13 +40,7 @@ export default function BookstorePage() {
   const [priceRange, setPriceRange] = useState([0, 10000]);
 
   const handleAddBook = () => {
-    const title = prompt("Enter book title:");
-    const author = prompt("Enter author name:");
-    const price = prompt("Enter discounted price (in INR):");
-    const image = prompt("Enter image URL:");
-    const rating = prompt("Enter rating (1-5):");
-    const popularity = prompt("Enter popularity score:");
-    const coverType = prompt("Enter cover type (Paperback/Hardcover):");
+    
     if (title && author && price && image && rating && popularity && coverType) {
       setBooks([
         ...books,
@@ -97,12 +91,14 @@ export default function BookstorePage() {
           <h2 className="text-4xl font-bold mb-4">
             Give Old Books a New Life – Sell, Lend & Borrow with Ease
           </h2>
+          <a href="/addbook">
           <button
             onClick={handleAddBook}
             className="bg-[#1e5e75] text-white px-3 py-2 rounded hover:bg-pink-600 transition"
           >
             Add Your Book
           </button>
+          </a>
         </div>
         <img
           src="/images/bookstore.jpg"
