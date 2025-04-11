@@ -2,15 +2,37 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function AddBookPage() {
-  const [newBook, setNewBook] = useState({ title: "", author: "", price: "", image: "" });
+  const [newBook, setNewBook] = useState({
+    title: "",
+    author: "",
+    price: "",
+    image: "",
+    coverType: "CoverType",
+    purpose: "Sell or Lend"
+  });
+  const [previewImage, setPreviewImage] = useState(null);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setNewBook({ ...newBook, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setNewBook({ ...newBook, [name]: value });
+  };
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setNewBook({ ...newBook, image: reader.result });
+        setPreviewImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   const handleAddBook = () => {
-    if (newBook.title && newBook.author && newBook.price && newBook.image) {
+    const { title, author, price, image } = newBook;
+    if (title && author && price && image) {
       const storedBooks = JSON.parse(localStorage.getItem("books")) || [];
       const updatedBooks = [
         ...storedBooks,
@@ -18,14 +40,21 @@ export default function AddBookPage() {
           ...newBook,
           price: parseInt(newBook.price),
           rating: 4.0,
-          popularity: 50,
-          coverType: "Paperback"
+          popularity: 50
         }
       ];
       localStorage.setItem("books", JSON.stringify(updatedBooks));
       alert("Book added successfully!");
-      setNewBook({ title: "", author: "", price: "", image: "" });
-      navigate("/bookstore"); // 👈 Redirect to bookstore page
+      setNewBook({
+        title: "",
+        author: "",
+        price: "",
+        image: "",
+        coverType: "CoverType",
+        purpose: "Sell or Lend"
+      });
+      setPreviewImage(null);
+      navigate("/bookstore");
     } else {
       alert("Please fill in all fields.");
     }
@@ -57,24 +86,57 @@ export default function AddBookPage() {
             className="w-full border px-4 py-3 rounded text-lg"
           />
           <input
-            type="text"
+            type="number"
             name="price"
             placeholder="Price"
             value={newBook.price}
             onChange={handleChange}
             className="w-full border px-4 py-3 rounded text-lg"
           />
-          <input
-            type="text"
-            name="image"
-            placeholder="Image URL"
-            value={newBook.image}
+
+          {/* Cover Type Dropdown */}
+          <select
+            name="coverType"
+            value={newBook.coverType}
             onChange={handleChange}
             className="w-full border px-4 py-3 rounded text-lg"
-          />
+          >
+            <option value="Paperback">Paperback</option>
+            <option value="Hardcover">Hardcover</option>
+          </select>
+
+          {/* Sell or Lend Dropdown */}
+          <select
+            name="purpose"
+            value={newBook.purpose}
+            onChange={handleChange}
+            className="w-full border px-4 py-3 rounded text-lg"
+          >
+            <option value="Sell">Sell</option>
+            <option value="Lend">Lend</option>
+          </select>
+
+          {/* Image Upload */}
+          <div className="space-y-2">
+            <label className="block font-medium text-gray-700">Upload Book Cover</label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
+              className="w-full text-sm"
+            />
+            {previewImage && (
+              <img
+                src={previewImage}
+                alt="Preview"
+                className="w-32 h-48 object-cover rounded-lg mt-2"
+              />
+            )}
+          </div>
+
           <button
             onClick={handleAddBook}
-            className="w-full bg-blue-500 text-white px-6 py-3 rounded text-lg hover:bg-blue-600 transition"
+            className="w-full bg-blue-600 text-white px-6 py-3 rounded text-lg hover:bg-blue-700 transition"
           >
             Add Book
           </button>
