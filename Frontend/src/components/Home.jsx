@@ -168,7 +168,7 @@ const EasyStudyHome = () => {
         </div>
 
         <footer className="mt-16 border-t pt-6 border-gray-300 text-sm text-gray-100 grid md:grid-cols-5 gap-4 items-center">
-          <div className="col-span-1 font-bold text-[#1e5e75] text-lg">SkillXchange</div>
+          <div className="col-span-1 font-bold text-[#1e5e75] text-lg">SkillXChange</div>
           <div className="col-span-1">ABOUT<br />PROGRAM</div>
           <div className="col-span-1">COURSES<br />REVIEWS</div>
           <div className="col-span-1">
@@ -184,6 +184,15 @@ const EasyStudyHome = () => {
           </div>
         </footer>
       </section>
+      <div className="fixed bottom-6 right-6 z-50 animate-bounce">
+  <img
+    src="/images/chatbot.svg"
+    alt="AI Chatbot"
+    className="w-24 h-24 rounded-full shadow-lg cursor-pointer hover:scale-105 transition"
+    title="Need help? Chat with us!"
+  />
+</div>
+
     </>
   );
 };

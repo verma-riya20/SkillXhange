@@ -10,7 +10,8 @@ import BookStorePage from './components/BookStorePage';
 import Books from './components/Books';
 import AddBook from './components/AddBook';
 import AboutPage from './components/About';
-
+import CartPage from './components/Cart';
+import PaymentPage from './components/Payment';
 
 function App() {
   return (
@@ -26,6 +27,8 @@ function App() {
         <Route path="/books" element={<Books />} />
         <Route path="/bookstore" element={<BookStorePage />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/payment" element={<PaymentPage />} />
       </Routes>
     </>
   )

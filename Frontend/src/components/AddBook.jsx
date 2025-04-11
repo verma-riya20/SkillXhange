@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function AddBookPage() {
   const [newBook, setNewBook] = useState({ title: "", author: "", price: "", image: "" });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setNewBook({ ...newBook, [e.target.name]: e.target.value });
@@ -9,9 +11,21 @@ export default function AddBookPage() {
 
   const handleAddBook = () => {
     if (newBook.title && newBook.author && newBook.price && newBook.image) {
-      console.log("Book added:", newBook);
-      setNewBook({ title: "", author: "", price: "", image: "" });
+      const storedBooks = JSON.parse(localStorage.getItem("books")) || [];
+      const updatedBooks = [
+        ...storedBooks,
+        {
+          ...newBook,
+          price: parseInt(newBook.price),
+          rating: 4.0,
+          popularity: 50,
+          coverType: "Paperback"
+        }
+      ];
+      localStorage.setItem("books", JSON.stringify(updatedBooks));
       alert("Book added successfully!");
+      setNewBook({ title: "", author: "", price: "", image: "" });
+      navigate("/bookstore"); // 👈 Redirect to bookstore page
     } else {
       alert("Please fill in all fields.");
     }
