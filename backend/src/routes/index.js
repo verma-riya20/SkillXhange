@@ -1,7 +1,8 @@
+// routes/index.js
 import express from 'express';
 import { createUser, getUsers } from '../controllers/userController.js';
 import { createBook, getBooks } from '../controllers/bookController.js';
-import { askGemini, askGeminiChat } from '../services/geminiService.js'; // ✅ must include .js
+import { askGemini, askGeminiChat } from '../services/geminiService.js';
 
 
 const router = express.Router();
@@ -14,7 +15,7 @@ router.get('/users', getUsers);
 router.post('/books', createBook);
 router.get('/books', getBooks);
 
-// AI Routes
+// Gemini AI Routes
 router.post('/ai/mentor', async (req, res) => {
   const { skill, level, availability } = req.body;
   const prompt = `I want to learn ${skill}. I am at ${level} level. I am available ${availability}. Suggest the best student mentors from a student pool who match my needs.`;
@@ -38,5 +39,18 @@ router.post('/ai/book', async (req, res) => {
     res.status(500).json({ error: 'AI request failed' });
   }
 });
+
+router.post('/ai/book-chat', async (req, res) => {
+  const { conversation } = req.body;
+  try {
+    const result = await askGeminiChat(conversation);
+    res.json({ response: result });
+  } catch (err) {
+    res.status(500).json({ error: 'AI chat request failed' });
+  }
+});
+
+// Groq Chatbot Route
+
 
 export default router;
