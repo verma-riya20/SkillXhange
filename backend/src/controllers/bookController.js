@@ -1,4 +1,5 @@
-import Book from '../models/Book.js';
+import Book from '../models/Books.js'; // match the filename exactly
+
 
 export const createBook = async (req, res) => {
   try {
