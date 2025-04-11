@@ -1,21 +1,25 @@
-import { useEffect, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
+import { AuthContext } from '../context/AuthContext';
 import toast from "react-hot-toast";
 
 const PrivateRoute = ({ component }) => {
-  const user = JSON.parse(localStorage.getItem("loggedInUser"));
-  const toastShown = useRef(false); // 👈 remember if toast already shown
+  const { user, checkingAuth } = useContext(AuthContext);
+  const toastShown = useRef(false);
 
   useEffect(() => {
-    if (!user && !toastShown.current) {
+    if (!checkingAuth && !user && !toastShown.current) {
       toast.error("Please log in to access this page.");
       toastShown.current = true;
     }
-  }, [user]);
+  }, [checkingAuth, user]);
+
+  if (checkingAuth) return null; // don't render anything yet
 
   return user ? component : null;
 };
 
 export default PrivateRoute;
+
 
 
 

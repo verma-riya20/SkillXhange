@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
-import { InstructorContext } from "../context.jsx/InstructorContext";
+import { InstructorContext } from '../context/InstructorContext';
 
 const RegisterTutor = () => {
   const { setInstructors } = useContext(InstructorContext);

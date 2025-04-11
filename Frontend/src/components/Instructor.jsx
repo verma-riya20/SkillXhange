@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { InstructorProvider } from "../context.jsx/InstructorContext";
+import { InstructorProvider } from "../context/InstructorContext";
 import { useContext } from "react";
-import { InstructorContext } from "../context.jsx/InstructorContext";
+import { InstructorContext } from "../context/InstructorContext";
 import { useEffect } from "react";
 
 
