@@ -90,7 +90,7 @@ const EasyStudyHome = () => {
           <div className="flex justify-center">
           </div>
           <div>
-            <h2 className="font-chewy text-4xl font-semibold text-[#1e5e75] mb-8">Why Choose SkillXchange?</h2>
+            <h2 className="font-chewy text-4xl font-semibold text-[#1e5e75] mb-8">Why Choose SkillXChange?</h2>
             <div className="space-y-6 text-[#1e5e75]">
               {[{
                 title: "Connect with Top-Rated Tutors",
