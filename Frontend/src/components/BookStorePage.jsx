@@ -40,12 +40,39 @@ export default function BookstorePage() {
   const [sortBy, setSortBy] = useState("priceAsc");
   const [filterCover, setFilterCover] = useState("");
   const [priceRange, setPriceRange] = useState([0, 10000]);
+  const [cartItems, setCartItems] = useState([]);
+
 
   useEffect(() => {
     const storedBooks = JSON.parse(localStorage.getItem("books")) || [];
-    const allBooks = [...initialBooks, ...storedBooks];
-    setBooks(allBooks);
-  }, [location]);
+    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+  
+    const existingTitles = new Set(storedBooks.map((b) => b.title));
+
+    const mergedBooks = [
+      ...storedBooks,
+      ...initialBooks.filter((book) => !existingTitles.has(book.title))
+    ];
+  
+    setBooks(mergedBooks);
+    setCartItems(storedCart);
+  
+    localStorage.setItem("books", JSON.stringify(mergedBooks));
+  }, []);
+  
+ 
+  const isInCart = (book) => {
+    return cartItems.some((item) => item.title === book.title);
+  };
+  
+
+  const handleAddToCart = (book) => {
+    const newCart = [...cartItems, book];
+    setCartItems(newCart);
+    localStorage.setItem("cart", JSON.stringify(newCart));
+  };
+  
+  
 
   const filteredBooks = books
     .filter(
@@ -152,9 +179,21 @@ export default function BookstorePage() {
             <p className="text-pink-500 font-semibold mb-4">
               ₹{book.price.toLocaleString("en-IN")}
             </p>
-            <button className="w-full bg-pink-500 text-white px-4 py-2 rounded hover:bg-pink-600 transition">
-              Add To Cart
-            </button>
+            {isInCart(book) ? (
+            <button
+             disabled
+             className="w-full bg-gray-400 text-white px-4 py-2 rounded cursor-not-allowed" >
+              Added to Cart
+              </button>
+             ) : (
+             <button
+               onClick={() => handleAddToCart(book)}
+               className="w-full bg-pink-500 text-white px-4 py-2 rounded hover:bg-pink-600 transition" >
+                 Add To Cart
+               </button>
+            )}
+
+
           </div>
         ))}
       </div>

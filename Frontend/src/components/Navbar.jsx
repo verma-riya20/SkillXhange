@@ -77,6 +77,12 @@ const Navbar = () => {
                 Login
               </button>
             )}
+            <a href="/cart">
+            <button className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
+             View Cart
+            </button>
+            </a>
+
           </div>
 
           <div className="md:hidden flex items-center">
