@@ -22,6 +22,7 @@ export default function CartPage() {
   const totalPrice = cartItems.reduce((sum, item) => sum + parseFloat(item.price), 0);
 
   return (
+    <div className="bg-gradient-to-b from-[#1c637b] via-[#e2b091] to-[#f9f1e9]">
     <div className="p-6 max-w-5xl mx-auto">
       <h1 className="text-3xl font-bold mb-6">🛒 Your Cart</h1>
 
@@ -59,17 +60,13 @@ export default function CartPage() {
              Proceed to Payment
               </button>
             </a>
-            <button
-              onClick={handleClearCart}
-              className="mt-4 bg-red-500 text-white px-6 py-2 rounded hover:bg-red-600 transition"
-            >
-              Clear Cart
-            </button>
+            
            
 
           </div>
         </>
       )}
+    </div>
     </div>
   );
 }
