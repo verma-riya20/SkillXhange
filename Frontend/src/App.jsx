@@ -15,7 +15,7 @@ import PaymentPage from './components/Payment';
 //ai
 import MentorAssistant from './components/ai/MentorAssistant';
 import BookRecommender from './components/ai/BookRecommender';
-import BookChat from './components/ai/BookChat';
+import StudentMentor from './components/ai/StudentMentor';
 import PrivateRoute from './components/PrivateRoute';
 import { Toaster } from "react-hot-toast";
 
@@ -46,7 +46,7 @@ function App() {
         {/* AI Features */}
         <Route path="/ai/mentor" element={ <MentorAssistant /> } />
         <Route path="/ai/book-recommend" element={ <BookRecommender />} />
-        <Route path="/ai/book-chat" element={<BookChat />} />
+        <Route path="/ai/student-mentor" element={<StudentMentor />} />
         
        
       </Routes>
