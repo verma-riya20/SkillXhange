@@ -154,17 +154,25 @@ const EasyStudyHome = () => {
             <h2 className="text-3xl md:text-4xl font-chewy font-semibold text-[#1b4f60] mb-4">Still have questions?</h2>
             <p className="text-gray-700 mb-6">Leave a request and we will contact you to help you choose the best training format.</p>
             <form
-            action="https://formsubmit.co/preeti1504kumari@gmail.com"
-              method="POST"
-              className="flex items-center gap-4"
-             >
-             <input
-              type="email"
-              name="query"
-              placeholder="Your email"
-             required
-             className="px-4 py-3 rounded-full border border-gray-300 focus:outline-none w-2/3"
-            />
+  action="https://formsubmit.co/preeti1504kumari@gmail.com"
+  method="POST"
+  className="flex flex-col md:flex-row items-center gap-4"
+>
+  <input
+    type="email"
+    name="email"
+    placeholder="Your Email"
+    required
+    className="px-4 py-3 rounded-full border border-gray-300 focus:outline-none w-full md:w-1/3"
+  />
+  <input
+    type="text"
+    name="query"
+    placeholder="Your Query"
+    required
+    className="px-4 py-3 rounded-full border border-gray-300 focus:outline-none w-full md:w-1/2"
+  />
+
             <input type="hidden" name="_subject" value="New Query from Bookstore" />
              <input type="hidden" name="_captcha" value="false" />
             <button
