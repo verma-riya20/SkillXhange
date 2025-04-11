@@ -72,13 +72,13 @@ const Navbar = () => {
             ) : (
               <button
                 onClick={() => loginWithRedirect()}
-                className="text-white hover:text-green-300 transition"
+                className="text-white hover:text-[#e4b797] transition"
               >
                 Login
               </button>
             )}
             <a href="/cart">
-            <button className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
+            <button className="bg-[#ffe7d5] text-[#1b5265] px-4 py-2 rounded hover:bg-[#e4b797] transition">
              View Cart
             </button>
             </a>
@@ -134,7 +134,7 @@ const Navbar = () => {
             ) : (
               <button
                 onClick={() => loginWithRedirect()}
-                className="block py-2 w-full text-left hover:text-green-300"
+                className="block py-2 w-full text-left hover:text-[#e4b797]"
               >
                 Login
               </button>
