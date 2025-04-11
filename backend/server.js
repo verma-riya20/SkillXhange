@@ -4,7 +4,9 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 
+
 import routes from './src/routes/index.js';
+import chatHandler from './src/services/chatHandler.js';
 
 dotenv.config();
 
@@ -17,7 +19,11 @@ mongoose.connect(process.env.MONGODB_URL)
   .catch(err => console.error('MongoDB connection error:', err));
 
 app.use('/api', routes);
+//chatbot
+app.post('/chat', chatHandler);
 
 app.listen(5000, () => {
   console.log("Server running on port 5000");
 });
+
+

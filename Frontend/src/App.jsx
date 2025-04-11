@@ -13,31 +13,38 @@ import AboutPage from './components/About';
 import CartPage from './components/Cart';
 import PaymentPage from './components/Payment';
 //ai
-import MentorAssistant from './components/ai/MentorAssistant';
+import MentorChat from './components/ai/MentorAssistant';
 import BookRecommender from './components/ai/BookRecommender';
 import BookChat from './components/ai/BookChat';
+import PrivateRoute from './components/PrivateRoute';
+import { Toaster } from "react-hot-toast";
 
 
 function App() {
   return (
     <>
       <Navbar />
+      <Toaster position="top-center" reverseOrder={false} />
       <Routes>
+        
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<Services />} />
-        <Route path="/tutorprofile" element={<TutorProfile />} />
-        <Route path="/instructor" element={<Instructor />} />
-        <Route path="/register-tutor" element={<RegisterTutor />} />
-        <Route path="/addbook" element={<AddBook />} />
+        <Route path="/tutorprofile" element={<PrivateRoute> <TutorProfile /> </PrivateRoute>} />
+        <Route path="/instructor" element={<PrivateRoute> <Instructor /> </PrivateRoute>} />
+        
+        <Route path="/register-tutor" element={<PrivateRoute> <RegisterTutor /> </PrivateRoute>} />
+      
+      
+        <Route path="/addbook" element={<PrivateRoute> <AddBook /> </PrivateRoute>} />
         <Route path="/books" element={<Books />} />
-        <Route path="/bookstore" element={<BookStorePage />} />
+        <Route path="/bookstore" element={ <BookStorePage />  } />
         <Route path="/about" element={<AboutPage />} />
-        <Route path="/cart" element={<CartPage />} />
-        <Route path="/payment" element={<PaymentPage />} />
+        <Route path="/cart" element={<PrivateRoute> <CartPage /> </PrivateRoute>} />
+        <Route path="/payment" element={<PrivateRoute> <PaymentPage /> </PrivateRoute>} />
         {/* AI Features */}
-        <Route path="/ai/mentor" element={<MentorAssistant />} />
-        <Route path="/ai/book-recommend" element={<BookRecommender />} />
-        <Route path="/ai/book-chat" element={<BookChat />} />
+        <Route path="/ai/mentor" element={<PrivateRoute> <MentorAssistant /> </PrivateRoute>} />
+        <Route path="/ai/book-recommend" element={<PrivateRoute> <BookRecommender /> </PrivateRoute>} />
+        <Route path="/ai/book-chat" element={<PrivateRoute> <BookChat /> </PrivateRoute>} />
       </Routes>
     </>
   )
