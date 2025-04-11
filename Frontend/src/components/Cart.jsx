@@ -54,12 +54,19 @@ export default function CartPage() {
 
           <div className="text-right mt-4">
             <p className="text-xl font-bold">Total: ₹{totalPrice.toLocaleString("en-IN")}</p>
+            <a href="/payment">
+              <button className="mt-6 w-full bg-blue-600 text-white py-3 rounded hover:bg-blue-700 transition">
+             Proceed to Payment
+              </button>
+            </a>
             <button
               onClick={handleClearCart}
               className="mt-4 bg-red-500 text-white px-6 py-2 rounded hover:bg-red-600 transition"
             >
               Clear Cart
             </button>
+           
+
           </div>
         </>
       )}
