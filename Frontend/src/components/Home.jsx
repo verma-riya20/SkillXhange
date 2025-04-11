@@ -64,7 +64,7 @@ const EasyStudyHome = () => {
             Exchange skills, share books, and build knowledge together — because learning is better when it's shared.
             </p>
             <div className="flex gap-4 mb-6">
-              <a href="/register-tutor">
+              <a href="/instructor">
                 <button className="px-6 py-3 rounded-full bg-slate-950 text-white font-semibold shadow-lg hover:scale-105 transition-transform">
                   GET STARTED
                 </button>
@@ -88,9 +88,10 @@ const EasyStudyHome = () => {
       >
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
           <div className="flex justify-center">
+            <img src="/images/bgbook.webp" alt="" className="rounded-lg"/>
           </div>
           <div>
-            <h2 className="font-chewy text-4xl font-semibold text-[#1e5e75] mb-8">Why Choose SkillXchange?</h2>
+            <h2 className="font-chewy text-4xl font-semibold text-[#1e5e75] mb-8">Why Choose SkillXChange?</h2>
             <div className="space-y-6 text-[#1e5e75]">
               {[{
                 title: "Connect with Top-Rated Tutors",
