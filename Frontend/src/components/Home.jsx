@@ -160,7 +160,7 @@ const EasyStudyHome = () => {
           <div className="w-full flex justify-center">
             <div className="bg-white rounded-[32px] p-8 shadow-lg max-w-xs">
               <div className="w-full h-48 bg-[#1e5e75] rounded-lg flex items-center justify-center text-white font-semibold text-center">
-                WordPress<br />The ideal course to learn<br />how to manage all aspects
+                <img src="/images/question.jpg" alt="" className="w-full h-full object-contain"  />
               </div>
             </div>
           </div>
