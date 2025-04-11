@@ -45,7 +45,7 @@ function App() {
         <Route path="/payment" element={<PaymentPage />} />
         {/* AI Features */}
         <Route path="/ai/mentor" element={ <MentorAssistant /> } />
-        <Route path="/ai/book-recommend" element={ <BookRecommend} />
+        <Route path="/ai/book-recommend" element={ <BookRecommend/>} />
         <Route path="/ai/book-chat" element={<BookChat />} />
         <Route path="/chatbot" element={<PrivateRoute> <BookChat /> </PrivateRoute>} />
        
