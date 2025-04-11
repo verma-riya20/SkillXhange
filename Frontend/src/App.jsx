@@ -13,7 +13,7 @@ import AboutPage from './components/About';
 import CartPage from './components/Cart';
 import PaymentPage from './components/Payment';
 //ai
-import MentorChat from './components/ai/MentorAssistant';
+import MentorAssistant from './components/ai/MentorAssistant';
 import BookRecommender from './components/ai/BookRecommender';
 import BookChat from './components/ai/BookChat';
 import PrivateRoute from './components/PrivateRoute';
@@ -47,6 +47,8 @@ function App() {
         <Route path="/ai/mentor" element={ <MentorAssistant /> } />
         <Route path="/ai/book-recommend" element={ <BookRecommend} />
         <Route path="/ai/book-chat" element={<BookChat />} />
+        <Route path="/chatbot" element={<PrivateRoute> <BookChat /> </PrivateRoute>} />
+       
       </Routes>
     </>
   )

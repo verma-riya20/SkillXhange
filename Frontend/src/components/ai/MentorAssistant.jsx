@@ -1,9 +1,9 @@
-/// Chatbot.jsx
-import React, { useState } from 'react';
+// Chatbot.jsx
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const Chatbot = ({ instructors }) => {
+const Chatbot = () => {
   const [formStep, setFormStep] = useState(0);
   const [formData, setFormData] = useState({
     skill: '',
@@ -72,26 +72,21 @@ const Chatbot = ({ instructors }) => {
   };
 
   const submitChat = async () => {
-    const prompt = `I want to learn ${formData.skill}. I'm looking for a ${formData.mentorType} mentor. I'm available during ${formData.timePreference}. Suggest a suitable mentor.`;
     try {
-      const res = await axios.post('http://localhost:5000/chat', {
-        messages: [prompt]
-      });
-      const response = res.data.response;
-      setChatbotReply(response);
-
-      if (!Array.isArray(instructors)) {
-        console.error('Instructor list is missing or invalid');
-        return;
-      }
-
+      const res = await axios.get('http://localhost:5000/api/users');
+      const allInstructors = res.data;
       const skillKeywords = formData.skill.toLowerCase().split(' ');
-      const matched = instructors.filter(inst =>
-        inst.skills.some(skill => skillKeywords.some(k => skill.toLowerCase().includes(k)))
+      const matched = allInstructors.filter(inst =>
+        inst.skills.some(skill =>
+          skillKeywords.some(keyword => skill.toLowerCase().includes(keyword))
+        )
       );
+      const response = `We found ${matched.length} instructors matching your skill preference.`;
+      setChatbotReply(response);
       setRecommendations(matched);
+
       if (matched.length > 0) {
-        navigate('/instructor', { state: { recommended: matched[0] } });
+        navigate('/instructor', { state: { recommendedList: matched } });
       }
     } catch (err) {
       console.error('Chat error', err);
