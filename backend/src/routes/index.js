@@ -1,7 +1,8 @@
 import express from 'express';
 import { createUser, getUsers } from '../controllers/userController.js';
 import { createBook, getBooks } from '../controllers/bookController.js';
-import { askGemini } from '../services/geminiService.js';
+import { askGemini, askGeminiChat } from '../services/geminiService.js'; // ✅ must include .js
+
 
 const router = express.Router();
 
