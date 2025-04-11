@@ -31,22 +31,22 @@ function App() {
         
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<Services />} />
-        <Route path="/tutorprofile" element={ <TutorProfile /> }/>
-        <Route path="/instructor" element={ <Instructor /> } />
+        <Route path="/tutorprofile" element={ <TutorProfile /> } />
+        <Route path="/instructor" element={<Instructor />} />
         
-        <Route path="/register-tutor" element={<PrivateRoute> <RegisterTutor /> </PrivateRoute>} />
+        <Route path="/register-tutor" element={ <RegisterTutor /> } />
       
       
-        <Route path="/addbook" element={<PrivateRoute> <AddBook /> </PrivateRoute>} />
+        <Route path="/addbook" element={<AddBook />} />
         <Route path="/books" element={<Books />} />
         <Route path="/bookstore" element={ <BookStorePage />  } />
         <Route path="/about" element={<AboutPage />} />
-        <Route path="/cart" element={<PrivateRoute> <CartPage /> </PrivateRoute>} />
-        <Route path="/payment" element={<PrivateRoute> <PaymentPage /> </PrivateRoute>} />
+        <Route path="/cart" element={ <CartPage />} />
+        <Route path="/payment" element={<PaymentPage />} />
         {/* AI Features */}
-        <Route path="/ai/mentor" element={<PrivateRoute> <MentorAssistant /> </PrivateRoute>} />
-        <Route path="/ai/book-recommend" element={<PrivateRoute> <BookRecommender /> </PrivateRoute>} />
-        <Route path="/ai/book-chat" element={<PrivateRoute> <BookChat /> </PrivateRoute>} />
+        <Route path="/ai/mentor" element={ <MentorAssistant /> } />
+        <Route path="/ai/book-recommend" element={ <BookRecommend/>} />
+        <Route path="/ai/book-chat" element={<BookChat />} />
         <Route path="/chatbot" element={<PrivateRoute> <BookChat /> </PrivateRoute>} />
        
       </Routes>
