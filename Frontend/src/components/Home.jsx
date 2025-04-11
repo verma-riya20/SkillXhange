@@ -64,7 +64,7 @@ const EasyStudyHome = () => {
             Exchange skills, share books, and build knowledge together — because learning is better when it's shared.
             </p>
             <div className="flex gap-4 mb-6">
-              <a href="/registertutor">
+              <a href="/register-tutor">
                 <button className="px-6 py-3 rounded-full bg-slate-950 text-white font-semibold shadow-lg hover:scale-105 transition-transform">
                   GET STARTED
                 </button>
