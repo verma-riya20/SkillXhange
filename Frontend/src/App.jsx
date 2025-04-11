@@ -31,8 +31,8 @@ function App() {
         
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<Services />} />
-        <Route path="/tutorprofile" element={<PrivateRoute> <TutorProfile /> </PrivateRoute>} />
-        <Route path="/instructor" element={<PrivateRoute> <Instructor /> </PrivateRoute>} />
+        <Route path="/tutorprofile" element={ <TutorProfile /> }/>
+        <Route path="/instructor" element={ <Instructor /> } />
         
         <Route path="/register-tutor" element={<PrivateRoute> <RegisterTutor /> </PrivateRoute>} />
       
