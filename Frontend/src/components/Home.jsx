@@ -57,11 +57,11 @@ const EasyStudyHome = () => {
         >
           <div className="text-white">
           <h1 className="text-4xl md:text-6xl font-semibold leading-tight mb-6 text-slate-950">
-  <span className="font-chewy">SkillXchange</span><br />
-  <span className="typewriter text-white font-chewy text-xl">Where Students Uplift Students.</span>
+  <span className="text-7xl font-chewy font-bold text-black-600 mb-8">SkillXChange</span><br />
+  <span className="typewriter font-chewy text-4xl transition-colors duration-300 hover:text-black-500"  style={{ color: 'oklch(97% 0.001 106.424)' }}>Where Students Uplift Students.</span>
 </h1>
-            <p className="text-lg max-w-md mb-6">
-              Learn What You Need, Teach What You Know.
+            <p className="text-lg max-w-md mb-6 text-brown-600 font-bold" style={{ color:'oklch(27.9% 0.041 260.031)' }}>
+            Exchange skills, share books, and build knowledge together — because learning is better when it's shared.
             </p>
             <div className="flex gap-4 mb-6">
               <a href="/registertutor">
@@ -90,7 +90,7 @@ const EasyStudyHome = () => {
           <div className="flex justify-center">
           </div>
           <div>
-            <h2 className="text-3xl font-semibold text-[#1e5e75] mb-8">Why Choose SkillXchange?</h2>
+            <h2 className="font-chewy text-4xl font-semibold text-[#1e5e75] mb-8">Why Choose SkillXchange?</h2>
             <div className="space-y-6 text-[#1e5e75]">
               {[{
                 title: "Connect with Top-Rated Tutors",
@@ -119,7 +119,7 @@ const EasyStudyHome = () => {
       <section className="bg-gradient-to-b from-[#1e5e75] via-[#d6a886] to-[#fef1ed] px-6 py-20">
         <div className="max-w-6xl mx-auto">
           <div className="text-white mb-16">
-            <h2 className="text-4xl md:text-5xl font-semibold mb-4">Professional courses<br />on creating websites</h2>
+            <h2 className="text-4xl font-chewy md:text-5xl font-semibold mb-4">Professional courses<br />on creating websites</h2>
             <p className="text-sm md:text-base max-w-md">Our courses are complete professional courses of high quality that include a set of video lessons, practical and training materials.</p>
           </div>
 
@@ -150,7 +150,7 @@ const EasyStudyHome = () => {
       <section className="bg-gradient-to-t from-[#fef1ed] to-[#d6a886] px-4 pt-20 pb-12 ">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <h2 className="text-3xl md:text-4xl font-semibold text-[#1e5e75] mb-4">Still have questions?</h2>
+            <h2 className="text-3xl md:text-4xl font-chewy font-semibold text-[#1e5e75] mb-4">Still have questions?</h2>
             <p className="text-gray-700 mb-6">Leave a request and we will contact you to help you choose the best training format.</p>
             <form className="flex items-center gap-4">
               <input type="email" placeholder="Your email" className="px-4 py-3 rounded-full border border-gray-300 focus:outline-none w-2/3" />
