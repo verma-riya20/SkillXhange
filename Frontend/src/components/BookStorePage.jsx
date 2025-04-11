@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { Search, Plus } from "lucide-react";
 
 const initialBooks = [
   {
     title: "Cape-Cod Stories",
     author: "Hans Christian Andersen",
-    price: 3200,
+    price: 200,
     image: "/images/cod.jpg",
     rating: 4.2,
     popularity: 100,
@@ -14,7 +15,7 @@ const initialBooks = [
   {
     title: "Broken Silence",
     author: "J.A. Templeton",
-    price: 2500,
+    price: 80,
     image: "/images/ilence.webp",
     rating: 4.5,
     popularity: 95,
@@ -23,7 +24,7 @@ const initialBooks = [
   {
     title: "A Thousand Seed",
     author: "Anonna Sultana",
-    price: 1800,
+    price: 100,
     image: "/images/sun.jpg",
     rating: 4.1,
     popularity: 80,
@@ -32,30 +33,19 @@ const initialBooks = [
 ];
 
 export default function BookstorePage() {
-  const [books, setBooks] = useState(initialBooks);
+  const location = useLocation(); // Triggers effect on return
+  const [books, setBooks] = useState([]);
   const [searchTitle, setSearchTitle] = useState("");
   const [searchAuthor, setSearchAuthor] = useState("");
   const [sortBy, setSortBy] = useState("priceAsc");
   const [filterCover, setFilterCover] = useState("");
   const [priceRange, setPriceRange] = useState([0, 10000]);
 
-  const handleAddBook = () => {
-    
-    if (title && author && price && image && rating && popularity && coverType) {
-      setBooks([
-        ...books,
-        {
-          title,
-          author,
-          price: parseInt(price),
-          image,
-          rating: parseFloat(rating),
-          popularity: parseInt(popularity),
-          coverType
-        }
-      ]);
-    }
-  };
+  useEffect(() => {
+    const storedBooks = JSON.parse(localStorage.getItem("books")) || [];
+    const allBooks = [...initialBooks, ...storedBooks];
+    setBooks(allBooks);
+  }, [location]);
 
   const filteredBooks = books
     .filter(
@@ -92,12 +82,9 @@ export default function BookstorePage() {
             Give Old Books a New Life – Sell, Lend & Borrow with Ease
           </h2>
           <a href="/addbook">
-          <button
-            onClick={handleAddBook}
-            className="bg-[#1e5e75] text-white px-3 py-2 rounded hover:bg-pink-600 transition"
-          >
-            Add Your Book
-          </button>
+            <button className="bg-[#1e5e75] text-white px-3 py-2 rounded hover:bg-pink-600 transition">
+              Add Your Book
+            </button>
           </a>
         </div>
         <img
@@ -107,29 +94,7 @@ export default function BookstorePage() {
         />
       </div>
 
-      {/* Services */}
-      <div className="grid grid-cols-3 gap-4 text-center mb-8">
-        <div>
-          <h3 className="font-semibold">Exchange & Lend</h3>
-          <p className="text-sm">
-            Lend your books or exchange with peers to make the most of them.
-          </p>
-        </div>
-        <div>
-          <h3 className="font-semibold">Verified Listings</h3>
-          <p className="text-sm">
-            All books are added by students for affordable peer-to-peer access.
-          </p>
-        </div>
-        <div>
-          <h3 className="font-semibold">Save Money, Reduce Waste</h3>
-          <p className="text-sm">
-            Buy books at discounted prices and contribute to sustainability.
-          </p>
-        </div>
-      </div>
-
-      {/* Search, Filter, Sort, Add */}
+      {/* Filters */}
       <div className="flex flex-col sm:grid sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-10">
         <input
           type="text"
@@ -165,7 +130,6 @@ export default function BookstorePage() {
           <option value="Paperback">Paperback</option>
           <option value="Hardcover">Hardcover</option>
         </select>
-        
       </div>
 
       {/* Book Listings */}
