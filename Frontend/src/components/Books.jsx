@@ -40,6 +40,7 @@ const Books = () => {
       </div>
       <div className="fixed bottom-6 right-6 z-50 animate-bounce">
   <img
+   onClick={() => window.open('http://localhost:5173/ai/book-recommend')}
     src="/images/chatbot.svg"
     alt="AI Chatbot"
     className="w-24 h-24 rounded-full shadow-lg cursor-pointer hover:scale-105 transition"
