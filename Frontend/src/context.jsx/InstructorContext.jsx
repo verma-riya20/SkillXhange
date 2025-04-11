@@ -1,37 +1,29 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
+import axios from "axios";
 
 export const InstructorContext = createContext();
 
 export const InstructorProvider = ({ children }) => {
-  const [instructors, setInstructors] = useState([
-    {
-      name: "John Doe",
-      title: "Full Stack Developer",
-      image: "/instructors/john.jpg",
-      skills: ["React", "Node.js", "MongoDB"],
-      rating: 4.8,
-      reviews: 120,
-    },
-    {
-      name: "Jane Smith",
-      title: "UI/UX Designer",
-      image: "/instructors/jane.jpg",
-      skills: ["Figma", "Sketch", "Adobe XD"],
-      rating: 4.6,
-      reviews: 85,
-    },
-    {
-      name: "Ravi Kumar",
-      title: "SEO Specialist",
-      image: "/instructors/ravi.jpg",
-      skills: ["SEO", "Google Analytics", "Content Strategy"],
-      rating: 4.9,
-      reviews: 143,
-    },
-  ]);
+  const [instructors, setInstructors] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchInstructors = async () => {
+      try {
+        const res = await axios.get("http://localhost:5000/api/tutors");
+        setInstructors(res.data);
+      } catch (error) {
+        console.error("Error fetching tutors:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchInstructors();
+  }, []);
 
   return (
-    <InstructorContext.Provider value={{ instructors, setInstructors }}>
+    <InstructorContext.Provider value={{ instructors, setInstructors, loading }}>
       {children}
     </InstructorContext.Provider>
   );

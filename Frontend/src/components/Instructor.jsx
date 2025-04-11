@@ -85,41 +85,49 @@ const InstructorsPage = () => {
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {filteredInstructors.map((inst, idx) => (
             <div
-              key={idx}
-              className="bg-white shadow-xl rounded-2xl p-6 text-center hover:shadow-2xl transition duration-300"
-            >
-              <img
-                src={inst.image}
-                alt={inst.name}
-                className="w-28 h-28 object-cover rounded-full mx-auto mb-4"
-              />
-              <h3 className="text-xl font-semibold text-[#1e1e2f]">{inst.name}</h3>
-              <p className="text-sm text-gray-500 mb-3">{inst.title}</p>
-
-              <div className="flex justify-center gap-2 flex-wrap mb-4">
-                {inst.skills.map((skill, i) => (
-                  <span
-                    key={i}
-                    className="bg-indigo-100 text-indigo-600 text-xs font-medium px-3 py-1 rounded-full"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-
-              <div className="flex items-center justify-center gap-1 text-yellow-400">
-                {[...Array(5)].map((_, i) => (
-                  <FaStar
-                    key={i}
-                    className={i < Math.round(inst.rating) ? "text-yellow-400" : "text-gray-300"}
-                  />
-                ))}
-                <span className="text-sm text-gray-600 ml-2">
-                  ({inst.reviews} reviews)
+            key={idx}
+            className="bg-white shadow-xl rounded-2xl p-6 text-center hover:shadow-2xl transition duration-300"
+          >
+            <img
+              src={inst.image}
+              alt={inst.name}
+              className="w-28 h-28 object-cover rounded-full mx-auto mb-4"
+            />
+            <h3 className="text-xl font-semibold text-[#1e1e2f]">{inst.name}</h3>
+            <p className="text-sm text-gray-500 mb-3">{inst.title}</p>
+          
+            <div className="flex justify-center gap-2 flex-wrap mb-4">
+              {inst.skills.map((skill, i) => (
+                <span
+                  key={i}
+                  className="bg-indigo-100 text-indigo-600 text-xs font-medium px-3 py-1 rounded-full"
+                >
+                  {skill}
                 </span>
-              </div>
+              ))}
             </div>
-          ))}
+          
+            <div className="flex items-center justify-center gap-1 text-yellow-400 mb-4">
+              {[...Array(5)].map((_, i) => (
+                <FaStar
+                  key={i}
+                  className={i < Math.round(inst.rating) ? "text-yellow-400" : "text-gray-300"}
+                />
+              ))}
+              <span className="text-sm text-gray-600 ml-2">
+                ({inst.reviews} reviews)
+              </span>
+            </div>
+          
+            {/* Know More Button */}
+            <button
+              onClick={() => navigate(`/tutor-profile/${inst._id}`)}
+              className="mt-2 bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition"
+            >
+              Know More
+            </button>
+          </div>
+          ))}          
         </div>
       </section>
     </div>

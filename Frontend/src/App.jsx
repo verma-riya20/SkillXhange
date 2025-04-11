@@ -25,8 +25,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<Services />} />
-        <Route path="/tutorprofile" element={<TutorProfile />} />
+       
         <Route path="/instructor" element={<Instructor />} />
+        <Route path="/tutor-profile/:id" element={<TutorProfile />} />
+        
         <Route path="/register-tutor" element={<RegisterTutor />} />
         <Route path="/addbook" element={<AddBook />} />
         <Route path="/books" element={<Books />} />
