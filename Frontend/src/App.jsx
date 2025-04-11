@@ -12,7 +12,8 @@ import AddBook from './components/AddBook';
 import AboutPage from './components/About';
 import CartPage from './components/Cart';
 import PaymentPage from './components/Payment';
-import MentorAssistant from './components/ai/MentorAssistant';
+//ai
+import MentorChat from './components/ai/MentorAssistant';
 import BookRecommender from './components/ai/BookRecommender';
 import BookChat from './components/ai/BookChat';
 import PrivateRoute from './components/PrivateRoute';
