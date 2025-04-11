@@ -3,9 +3,13 @@ import express from 'express';
 import { createUser, getUsers } from '../controllers/userController.js';
 import { createBook, getBooks } from '../controllers/bookController.js';
 import { askGemini, askGeminiChat } from '../services/geminiService.js';
+import { getInstructors} from '../controllers/getInstructors.js';
 
 
 const router = express.Router();
+//instructor
+router.get('/instructors', getInstructors);
+
 
 // User Routes
 router.post('/users', createUser);
