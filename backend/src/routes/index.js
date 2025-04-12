@@ -6,6 +6,9 @@ import { askGemini, askGeminiChat } from '../services/geminiService.js';
 import { getInstructors} from '../controllers/getInstructors.js';
 import chatHandler from '../services/chatHandler.js';
 
+//instructor ai
+import { findBestInstructors, localInstructorMatch } from '../services/instructorSuggestion.js';
+
 
 const router = express.Router();
 //instructor
@@ -58,5 +61,33 @@ router.post('/ai/book-chat', async (req, res) => {
 // Groq Chatbot Route
 //chatbot basic question
 router.post('/chatbot', chatHandler);
+
+// Instructor Suggestion Routes
+router.post('/match', async (req, res) => {
+  try {
+    const studentData = req.body;
+    
+    // Get AI recommendations
+    const result = await findBestInstructors(studentData);
+    
+    res.json({
+      success: true,
+      analysis: result.analysis,
+      recommendations: result.recommendations,
+      reasons: result.reasons,
+      tips: result.tips
+    });
+  } catch (error) {
+    console.error('Mentor matching error:', error);
+    // Fallback to local matching if AI fails
+    const recommendations = localInstructorMatch(req.body);
+    res.json({
+      success: false,
+      message: 'AI service unavailable, showing local results',
+      recommendations,
+      isFallback: true
+    });
+  }
+});
 
 export default router;
