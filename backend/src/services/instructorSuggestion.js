@@ -1,5 +1,5 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
-import  Instructor from '../models/Instructor.js';
+import  Tutor from '../models/Tutor.js';
 
 // Initialize Gemini AI
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
@@ -25,7 +25,7 @@ export const findBestInstructors = async (studentData) => {
   - Time Preference: ${studentData.timePreference}
 
   Available Instructors:
-  ${instructors.map(inst => 
+  ${Tutor.map(inst => 
     `Name: ${inst.name}, Title: ${inst.title}, Skills: ${inst.skills.join(', ')}, 
     Rating: ${inst.rating}, Reviews: ${inst.reviews}, Available: ${inst.availability}`
   ).join('\n')}
@@ -84,7 +84,7 @@ export const localInstructorMatch = (studentData) => {
   const { skill, mentorType, timePreference } = studentData;
   const skillLower = skill.toLowerCase();
   
-  return instructors.filter(inst => {
+  return Tutor.filter(inst => {
     const hasSkill = inst.skills.some(s => s.toLowerCase().includes(skillLower));
     const matchesType = !mentorType || 
       inst.title.toLowerCase().includes(mentorType.toLowerCase());
