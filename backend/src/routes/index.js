@@ -8,6 +8,7 @@ import chatHandler from '../services/chatHandler.js';
 
 //instructor ai
 import { findBestInstructors, localInstructorMatch } from '../services/instructorSuggestion.js';
+import Tutor from '../models/Tutor.js'; // ✅ must include .js
 
 
 const router = express.Router();
@@ -22,6 +23,52 @@ router.get('/users', getUsers);
 // Book Routes
 router.post('/books', createBook);
 router.get('/books', getBooks);
+
+// Tutor routes
+router.get('/tutors', async (req, res) => {
+  try {
+    const tutors = await Tutor.find();
+    res.json(tutors);
+  } catch (err) {
+    res.status(500).json({ error: 'Server Error' });
+  }
+});
+// get individual tutor
+router.get('/tutors/:id', async (req, res) => {
+  try {
+    const tutor = await Tutor.findById(req.params.id);
+    if (!tutor) return res.status(404).json({ error: 'Tutor not found' });
+    res.json(tutor);
+  } catch (err) {
+    res.status(500).json({ error: 'Server Error' });
+  }
+});
+
+// 
+
+
+// Tutor routes
+router.get('/tutors', async (req, res) => {
+  try {
+    const tutors = await Tutor.find();
+    res.json(tutors);
+  } catch (err) {
+    res.status(500).json({ error: 'Server Error' });
+  }
+});
+// get individual tutor
+router.get('/tutors/:id', async (req, res) => {
+  try {
+    const tutor = await Tutor.findById(req.params.id);
+    if (!tutor) return res.status(404).json({ error: 'Tutor not found' });
+    res.json(tutor);
+  } catch (err) {
+    res.status(500).json({ error: 'Server Error' });
+  }
+});
+
+// 
+
 
 // Gemini AI Routes
 router.post('/ai/mentor', async (req, res) => {
