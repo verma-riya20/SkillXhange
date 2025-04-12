@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { InstructorContext } from '../../context/InstructorContext';
 import axios from 'axios';
-import { Loader2, ArrowLeft, ArrowRight, Search, RotateCw } from 'lucide-react';
 
 const MentorAssistant = () => {
   const [formStep, setFormStep] = useState(0);
@@ -17,26 +16,23 @@ const MentorAssistant = () => {
   const [aiResponse, setAiResponse] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  
+
   const navigate = useNavigate();
   const { instructors } = useContext(InstructorContext);
 
   const steps = [
     {
-      label: 'What skill would you like to learn?',
+      label: 'What skill do you want to learn?',
       field: 'skill',
       input: (
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
-          <input
-            type="text"
-            value={formData.skill}
-            onChange={(e) => setFormData({...formData, skill: e.target.value})}
-            className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition"
-            placeholder="e.g. Python, Web Design, Data Science"
-            required
-          />
-        </div>
+        <input
+          type="text"
+          value={formData.skill}
+          onChange={(e) => setFormData({ ...formData, skill: e.target.value })}
+          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="e.g. Python, Web Design"
+          required
+        />
       )
     },
     {
@@ -45,80 +41,69 @@ const MentorAssistant = () => {
       input: (
         <select
           value={formData.experience}
-          onChange={(e) => setFormData({...formData, experience: e.target.value})}
-          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition"
+          onChange={(e) => setFormData({ ...formData, experience: e.target.value })}
+          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           required
         >
-          <option value="">Select your experience level</option>
-          <option value="beginner">Beginner (just starting out)</option>
-          <option value="intermediate">Intermediate (some knowledge)</option>
-          <option value="advanced">Advanced (looking to master)</option>
+          <option value="">Select level</option>
+          <option value="beginner">Beginner</option>
+          <option value="intermediate">Intermediate</option>
+          <option value="advanced">Advanced</option>
         </select>
       )
     },
     {
-      label: 'How much time can you dedicate weekly?',
+      label: 'How much time can you commit?',
       field: 'timeCommitment',
       input: (
-        <div className="space-y-2">
-          <select
-            value={formData.timeCommitment}
-            onChange={(e) => setFormData({...formData, timeCommitment: e.target.value})}
-            className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition"
-            required
-          >
-            <option value="">Select your availability</option>
-            <option value="1-3 hours">1-3 hours (casual learning)</option>
-            <option value="3-5 hours">3-5 hours (serious learning)</option>
-            <option value="5+ hours">5+ hours (intensive learning)</option>
-          </select>
-          <p className="text-sm text-gray-500">We'll match you with mentors who suit your pace</p>
-        </div>
+        <select
+          value={formData.timeCommitment}
+          onChange={(e) => setFormData({ ...formData, timeCommitment: e.target.value })}
+          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          required
+        >
+          <option value="">Select time commitment</option>
+          <option value="1-3 hours">1-3 hours/week</option>
+          <option value="3-5 hours">3-5 hours/week</option>
+          <option value="5+ hours">5+ hours/week</option>
+        </select>
       )
     },
     {
       label: 'What type of mentor are you looking for?',
       field: 'mentorType',
       input: (
-        <div className="grid grid-cols-2 gap-3">
-          {['developer', 'designer', 'data', 'cloud', 'security'].map((type) => (
-            <button
-              key={type}
-              type="button"
-              onClick={() => setFormData({...formData, mentorType: type})}
-              className={`p-3 rounded-lg border-2 transition-all ${formData.mentorType === type ? 
-                'border-indigo-500 bg-indigo-50 text-indigo-700' : 
-                'border-gray-200 hover:border-gray-300'}`}
-            >
-              {type.charAt(0).toUpperCase() + type.slice(1)}
-            </button>
-          ))}
-        </div>
+        <select
+          value={formData.mentorType}
+          onChange={(e) => setFormData({ ...formData, mentorType: e.target.value })}
+          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          required
+        >
+          <option value="">Select mentor type</option>
+          <option value="developer">Developer</option>
+          <option value="designer">Designer</option>
+          <option value="data">Data Scientist</option>
+          <option value="cloud">Cloud/DevOps</option>
+          <option value="security">Security</option>
+        </select>
       )
     },
     {
-      label: 'When are you typically available for sessions?',
+      label: 'When are you available for sessions?',
       field: 'timePreference',
       input: (
-        <div className="grid grid-cols-2 gap-3">
-          {[
-            { value: 'mornings', label: '🌅 Mornings' },
-            { value: 'evenings', label: '🌇 Evenings' },
-            { value: 'weekends', label: '🎉 Weekends' },
-            { value: 'anytime', label: '🕒 Anytime' }
-          ].map((time) => (
-            <button
-              key={time.value}
-              type="button"
-              onClick={() => setFormData({...formData, timePreference: time.value})}
-              className={`p-3 rounded-lg border-2 transition-all ${formData.timePreference === time.value ? 
-                'border-indigo-500 bg-indigo-50 text-indigo-700' : 
-                'border-gray-200 hover:border-gray-300'}`}
-            >
-              {time.label}
-            </button>
-          ))}
-        </div>
+        <select
+          value={formData.timePreference}
+          onChange={(e) => setFormData({ ...formData, timePreference: e.target.value })}
+          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          required
+        >
+          <option value="">Select availability</option>
+          <option value="mornings">Mornings</option>
+          <option value="evenings">Evenings</option>
+          <option value="weekends">Weekends</option>
+          <option value="anytime">Anytime</option>
+        </select>
       )
     }
   ];
@@ -126,10 +111,10 @@ const MentorAssistant = () => {
   const handleSubmit = async () => {
     setIsLoading(true);
     setError(null);
-    
+
     try {
-      const response = await axios.post('http://localhost:5000/api/match', formData);
-      
+      const response = await axios.post('/api/instructors/match', formData);
+
       if (response.data.success) {
         setAiResponse({
           analysis: response.data.analysis,
@@ -139,9 +124,8 @@ const MentorAssistant = () => {
         setRecommendations(response.data.recommendations);
       } else {
         setError(response.data.message || 'Failed to get recommendations');
-        // Use local matching if API fails
-        const localMatches = instructors.filter(inst => 
-          inst.skills.some(skill => 
+        const localMatches = instructors.filter(inst =>
+          inst.skills.some(skill =>
             skill.toLowerCase().includes(formData.skill.toLowerCase())
           )
         );
@@ -149,10 +133,9 @@ const MentorAssistant = () => {
       }
     } catch (err) {
       console.error('Error:', err);
-      setError('Failed to connect to mentor service. Showing local matches...');
-      // Fallback to basic local matching
-      const localMatches = instructors.filter(inst => 
-        inst.skills.some(skill => 
+      setError('Failed to connect to mentor service');
+      const localMatches = instructors.filter(inst =>
+        inst.skills.some(skill =>
           skill.toLowerCase().includes(formData.skill.toLowerCase())
         )
       );
@@ -163,182 +146,95 @@ const MentorAssistant = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-10">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Find Your Perfect Mentor</h1>
-          <p className="text-gray-600">
-            Answer a few questions and we'll match you with the ideal instructor for your learning journey
-          </p>
+    <div className="max-w-2xl mx-auto px-6 py-8 bg-white rounded-lg shadow-md mt-6">
+      <h2 className="text-3xl font-bold text-center mb-6">🎯 Find Your Perfect Mentor</h2>
+
+      {!recommendations.length ? (
+        <div className="space-y-6">
+          <label className="block text-lg font-medium text-gray-700">{steps[formStep].label}</label>
+          {steps[formStep].input}
+
+          <div className="flex justify-between mt-6">
+            {formStep > 0 && (
+              <button
+                onClick={() => setFormStep((f) => f - 1)}
+                className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-4 rounded-lg"
+              >
+                ⬅ Back
+              </button>
+            )}
+            <button
+              onClick={
+                formStep < steps.length - 1
+                  ? () => setFormStep((f) => f + 1)
+                  : handleSubmit
+              }
+              disabled={isLoading}
+              className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg"
+            >
+              {isLoading
+                ? 'Processing...'
+                : formStep < steps.length - 1
+                ? 'Next ➡'
+                : 'Find My Mentor 🚀'}
+            </button>
+          </div>
         </div>
+      ) : (
+        <div className="space-y-6">
+          {aiResponse.analysis && (
+            <div className="bg-blue-50 p-4 rounded-md border border-blue-200">
+              <h3 className="text-lg font-semibold text-blue-700 mb-2">🧠 AI Analysis</h3>
+              <p className="text-gray-800">{aiResponse.analysis}</p>
+            </div>
+          )}
 
-        {!recommendations.length ? (
-          <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-            <div className="p-6 sm:p-8">
-              <div className="mb-6">
-                <div className="flex items-center justify-between mb-2">
-                  <h2 className="text-xl font-semibold text-gray-800">
-                    {steps[formStep].label}
-                  </h2>
-                  <span className="text-sm text-gray-500">
-                    Step {formStep + 1} of {steps.length}
-                  </span>
-                </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div 
-                    className="bg-indigo-600 h-2 rounded-full transition-all duration-300" 
-                    style={{ width: `${((formStep + 1) / steps.length) * 100}%` }}
-                  ></div>
-                </div>
-              </div>
-
-              <div className="mb-6">
-                {steps[formStep].input}
-              </div>
-
-              <div className="flex justify-between">
-                {formStep > 0 ? (
-                  <button
-                    onClick={() => setFormStep(f => f - 1)}
-                    className="flex items-center gap-2 px-5 py-2.5 text-gray-700 hover:text-indigo-600 transition"
-                  >
-                    <ArrowLeft size={18} />
-                    Previous
-                  </button>
-                ) : (
-                  <div></div>
-                )}
-
+          <h3 className="text-xl font-bold text-gray-800 mt-4">👩‍🏫 Recommended Mentors</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {recommendations.map((mentor) => (
+              <div key={mentor._id || mentor.name} className="p-4 border rounded-lg shadow hover:shadow-lg transition">
+                <img
+                  src={mentor.image}
+                  alt={mentor.name}
+                  className="w-full h-40 object-cover rounded-md mb-3"
+                />
+                <h4 className="text-lg font-bold">{mentor.name}</h4>
+                <p className="text-sm text-gray-600">{mentor.title}</p>
+                <p className="text-sm mt-1 text-gray-700">{mentor.skills.join(', ')}</p>
                 <button
-                  onClick={formStep < steps.length - 1 ? 
-                    () => setFormStep(f => f + 1) : 
-                    handleSubmit
-                  }
-                  disabled={isLoading || 
-                    (formStep === 0 && !formData.skill) ||
-                    (formStep === 1 && !formData.experience) ||
-                    (formStep === 2 && !formData.timeCommitment) ||
-                    (formStep === 3 && !formData.mentorType) ||
-                    (formStep === 4 && !formData.timePreference)
-                  }
-                  className="flex items-center gap-2 px-5 py-2.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:bg-indigo-300 transition"
+                  onClick={() => navigate(`/instructors/${mentor._id}`)}
+                  className="mt-3 bg-green-500 text-white py-1 px-4 rounded hover:bg-green-600"
                 >
-                  {isLoading ? (
-                    <>
-                      <Loader2 className="animate-spin" size={18} />
-                      Processing...
-                    </>
-                  ) : formStep < steps.length - 1 ? (
-                    <>
-                      Next
-                      <ArrowRight size={18} />
-                    </>
-                  ) : (
-                    'Find My Mentor'
-                  )}
+                  View Profile
                 </button>
               </div>
+            ))}
+          </div>
+
+          {aiResponse.tips && (
+            <div className="bg-yellow-50 p-4 rounded-md border border-yellow-200">
+              <h3 className="text-lg font-semibold text-yellow-700 mb-2">💡 Learning Tips</h3>
+              <p className="text-gray-800">{aiResponse.tips}</p>
             </div>
-          </div>
-        ) : (
-          <div className="space-y-8">
-            <div className="bg-white rounded-xl shadow-lg overflow-hidden p-6">
-              {aiResponse.analysis && (
-                <div className="mb-8">
-                  <h3 className="text-xl font-semibold text-gray-800 mb-3">Your Personalized Learning Analysis</h3>
-                  <div className="bg-indigo-50 border-l-4 border-indigo-500 p-4 rounded-r-lg">
-                    <p className="text-gray-700 whitespace-pre-line">{aiResponse.analysis}</p>
-                  </div>
-                </div>
-              )}
+          )}
 
-              <div className="mb-6">
-                <h3 className="text-xl font-semibold text-gray-800 mb-4">Recommended Mentors For You</h3>
-                <div className="grid gap-6 sm:grid-cols-2">
-                  {recommendations.map(mentor => (
-                    <div key={mentor._id} className="border rounded-xl overflow-hidden hover:shadow-md transition">
-                      <div className="p-5">
-                        <div className="flex items-start gap-4">
-                          <img 
-                            src={mentor.image} 
-                            alt={mentor.name} 
-                            className="w-16 h-16 rounded-full object-cover border-2 border-white shadow-sm"
-                          />
-                          <div>
-                            <h4 className="font-bold text-lg text-gray-800">{mentor.name}</h4>
-                            <p className="text-indigo-600 font-medium">{mentor.title}</p>
-                            <div className="flex items-center mt-1">
-                              {[...Array(5)].map((_, i) => (
-                                <svg
-                                  key={i}
-                                  className={`w-4 h-4 ${i < Math.round(mentor.rating) ? 'text-yellow-400' : 'text-gray-300'}`}
-                                  fill="currentColor"
-                                  viewBox="0 0 20 20"
-                                >
-                                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                </svg>
-                              ))}
-                              <span className="text-sm text-gray-500 ml-1">({mentor.reviews} reviews)</span>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="mt-4">
-                          <div className="flex flex-wrap gap-2 mb-3">
-                            {mentor.skills.slice(0, 4).map((skill, i) => (
-                              <span key={i} className="px-2.5 py-1 bg-gray-100 text-gray-800 text-xs font-medium rounded-full">
-                                {skill}
-                              </span>
-                            ))}
-                          </div>
-                          <button
-                            onClick={() => navigate(`/instructors/${mentor._id}`)}
-                            className="w-full mt-3 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition"
-                          >
-                            View Profile & Schedule
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+          <button
+            onClick={() => {
+              setRecommendations([]);
+              setFormStep(0);
+            }}
+            className="mt-6 bg-gray-800 text-white py-2 px-4 rounded-lg hover:bg-gray-900"
+          >
+            🔄 Start New Search
+          </button>
+        </div>
+      )}
 
-              {aiResponse.tips && (
-                <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg mb-6">
-                  <h4 className="font-semibold text-blue-800 mb-2">Learning Tips From Our AI</h4>
-                  <p className="text-blue-700 whitespace-pre-line">{aiResponse.tips}</p>
-                </div>
-              )}
-
-              <div className="flex justify-center">
-                <button
-                  onClick={() => {
-                    setRecommendations([]);
-                    setFormStep(0);
-                    setFormData({
-                      skill: '',
-                      experience: '',
-                      timeCommitment: '',
-                      mentorType: '',
-                      timePreference: ''
-                    });
-                  }}
-                  className="flex items-center gap-2 px-5 py-2.5 text-indigo-600 hover:text-indigo-800 transition"
-                >
-                  <RotateCw size={16} />
-                  Start New Search
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {error && (
-          <div className="mt-4 p-4 bg-red-50 border-l-4 border-red-500 rounded-r-lg">
-            <p className="text-red-700">{error}</p>
-          </div>
-        )}
-      </div>
+      {error && (
+        <div className="mt-4 text-red-600 font-medium bg-red-50 p-2 rounded">
+          ⚠ {error}
+        </div>
+      )}
     </div>
   );
 };

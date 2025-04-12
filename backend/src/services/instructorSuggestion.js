@@ -1,6 +1,5 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
-import instructors from '../models/Instructor.js';
-// Then use InstructorModel in your code
+import  Instructor from '../models/Instructor.js';
 
 // Initialize Gemini AI
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
