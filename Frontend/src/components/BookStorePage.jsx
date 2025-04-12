@@ -4,30 +4,93 @@ import { Search, Plus } from "lucide-react";
 
 const initialBooks = [
   {
-    title: "Cape-Cod Stories",
-    author: "Hans Christian Andersen",
+    title: "To Kill a Mockingbird",
+    author: "Harper Lee",
     price: 200,
-    image: "/images/cod.jpg",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR819TtvIV0JJ5_Wzzfcnk3y2eXfPpamZmdbrg5ofv0Ydafpw_f",
     rating: 4.2,
     popularity: 100,
     coverType: "Hardcover"
   },
   {
-    title: "Broken Silence",
-    author: "J.A. Templeton",
+    title: "Fahrenheit 451",
+    author: "Ray Bradbury",
     price: 80,
-    image: "/images/ilence.webp",
+    image: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcRFADq12xEBVFEIELEeq8A0PoqRp_UUrFjxfLEosw3IR5E8tzwv",
     rating: 4.5,
     popularity: 95,
     coverType: "Paperback"
   },
   {
-    title: "A Thousand Seed",
-    author: "Anonna Sultana",
+    title: "The Book Thief",
+    author: "Markus Zusak",
     price: 100,
-    image: "/images/sun.jpg",
+    image: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcR-W_4DKzfvPOVZPfwHRn4OVbWYkTZRRT_F7QmPo8894_0QSzMG",
     rating: 4.1,
     popularity: 80,
+    coverType: "Hardcover"
+  },
+  {
+    title: "Who Moved My Cheese?",
+    author: "Spencer Johnson",
+    price: 250,
+    image: "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcS3Hma0cJxc5jxy7Wi-pGT9HeIOzQ2L7PO9JRnat9XcT_JyhtY8",
+    rating: 4.3,
+    popularity: 90,
+    coverType: "Hardcover"
+  },
+  {
+    title: "Where the Crawdads Sing",
+    author: "Delia Owens",
+    price: 300,
+    image: "https://images.penguinrandomhouse.com/cover/9780593540480",
+    rating: 4.6,
+    popularity: 120,
+    coverType: "Paperback"
+  },
+  {
+    title: "The Child",
+    author: "Fiona Barton",
+    price: 220,
+    image: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSvygWX_b4vUUCGzgAMnBiX60zPmSRZiX2LYy4JVBoIu_qOmAVp",
+    rating: 4.4,
+    popularity: 110,
+    coverType: "Hardcover"
+  },
+  {
+    title: "Lord of the Flies",
+    author: "William Golding",
+    price: 180,
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbxaG_KUYyx8LpEu5RkIlvoCYoB9S1sB8xEGBjfSTPyRDrxB0p",
+    rating: 4.7,
+    popularity: 130,
+    coverType: "Paperback"
+  },
+  {
+    title: "The Human Stain",
+    author: "Philip Roth",
+    price: 350,
+    image: "https://books.google.co.in/books/publisher/content?id=YbtNDwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE72S1tG75ArnUOTlbVbWIkiYFDj6ixOFgjtlKa_2997KCqZKm51MQEKmxvWG1LYAqk7XMY5nQu_2tKjA46eGAbqE6Y6pnGMPZsevwtQ0bc2x-AVQlfCveTvTHD6OsUzyuCjnbW7S",
+    rating: 4.8,
+    popularity: 150,
+    coverType: "Hardcover"
+  },
+  {
+    title: "The Alchemist",
+    author: "Paulo Coelho",
+    price: 200,
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTG4DIZ8zeBMCj1s7gRvHEAliiPmGukocfFUr8wElGeM73oZ2SY",
+    rating: 4.5,
+    popularity: 140,
+    coverType: "Paperback"
+  },
+  {
+    title: "Atomic Habits",
+    author: "James Clear",
+    price: 280,
+    image: "https://books.google.com/books/about/Atomic_Habits.html?id=lFhbDwAAQBAJ&source=kp_cover",
+    rating: 4.9,
+    popularity: 160,
     coverType: "Hardcover"
   }
 ];
@@ -109,7 +172,7 @@ export default function BookstorePage() {
             Give Old Books a New Life – Sell, Lend & Borrow with Ease
           </h2>
           <a href="/addbook">
-            <button className="bg-[#1e5e75] text-white px-3 py-2 rounded hover:bg-pink-600 transition">
+            <button className="bg-[#1e5e75] text-white px-3 py-2 rounded hover:bg-[#3a758a] transition">
               Add Your Book
             </button>
           </a>
@@ -122,7 +185,7 @@ export default function BookstorePage() {
       </div>
 
       {/* Filters */}
-      <div className="flex flex-col sm:grid sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-10">
+      <div className="flex flex-col sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
         <input
           type="text"
           placeholder="Search by Title"
@@ -161,22 +224,22 @@ export default function BookstorePage() {
 
       {/* Book Listings */}
       <h2 className="text-xl font-bold mb-6">Available Books</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-6 auto-rows-fr">
         {filteredBooks.map((book, index) => (
           <div
             key={index}
-            className="rounded-2xl shadow-md p-4 bg-white hover:shadow-lg transition"
+            className="rounded-2xl shadow-md p-4 bg-white hover:shadow-lg transition flex flex-col justify-between h-full min-h-[400px]"
           >
             <img
               src={book.image}
               alt={book.title}
-              className="w-full h-auto rounded-lg mb-4"
+              className="w-full h-[180px] object-cover rounded-lg mb-4"
             />
             <h3 className="font-semibold text-lg mb-1">{book.title}</h3>
-            <p className="text-sm text-gray-500 mb-1">{book.author}</p>
+            <p className="text-sm text-gray-500 mb-1 truncate max-w-full">{book.author}</p>
             <p className="text-sm text-gray-400 mb-1">{book.coverType}</p>
             <p className="text-yellow-600 font-semibold mb-1">⭐ {book.rating}</p>
-            <p className="text-pink-500 font-semibold mb-4">
+            <p className="text-[#1e5e75] font-semibold mb-4">
               ₹{book.price.toLocaleString("en-IN")}
             </p>
             {isInCart(book) ? (
@@ -188,7 +251,7 @@ export default function BookstorePage() {
              ) : (
              <button
                onClick={() => handleAddToCart(book)}
-               className="w-full bg-pink-500 text-white px-4 py-2 rounded hover:bg-pink-600 transition" >
+               className="w-full bg-[#1e5e75] text-white px-4 py-2 rounded hover:bg-[#3a758a] transition" >
                  Add To Cart
                </button>
             )}
