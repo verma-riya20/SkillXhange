@@ -3,10 +3,11 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
-import { InstructorProvider } from './context.jsx/InstructorContext.jsx'  // Adjust the path to your context file
+import { InstructorProvider } from './context/InstructorContext.jsx'  // Adjust the path to your context file
 
 //auth
 import { Auth0Provider } from "@auth0/auth0-react";
+import { AuthProvider } from './context/AuthContext.jsx'
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -19,10 +20,13 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     }}
   >
       <BrowserRouter>
+      <AuthProvider>
         <InstructorProvider>
           <App />
         </InstructorProvider>
+        </AuthProvider>
       </BrowserRouter>
     </Auth0Provider>
   </React.StrictMode>
+  
 );
