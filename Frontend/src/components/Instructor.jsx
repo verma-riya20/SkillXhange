@@ -129,7 +129,20 @@ const InstructorsPage = () => {
           ))}
         </div>
       </section>
-    </div>
+      <div className="fixed bottom-6 right-6 z-50 flex flex-col items-center animate-bounce">
+  <img
+    onClick={() => window.open('http://localhost:5173/ai/mentor')}
+    src="/images/chatbot.png"
+    alt="AI Chatbot"
+    className="w-24 h-24 rounded-full shadow-lg cursor-pointer hover:scale-105 transition"
+    title="Need help?"
+  />
+  <span className="mt-2 text-black bg-pink-200 px-3 py-1 rounded-full text-sm shadow-md">
+    Find Mentor
+  </span>
+</div>
+
+</div>
   );
 };
 
