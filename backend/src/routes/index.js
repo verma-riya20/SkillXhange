@@ -1,11 +1,20 @@
+// routes/index.js
 import express from 'express';
 import { createUser, getUsers } from '../controllers/userController.js';
 import { createBook, getBooks } from '../controllers/bookController.js';
-import { askGemini, askGeminiChat } from '../services/geminiService.js'; // ✅ must include .js
+import { askGemini, askGeminiChat } from '../services/geminiService.js';
+import { getInstructors} from '../controllers/getInstructors.js';
+import chatHandler from '../services/chatHandler.js';
+
+//instructor ai
+import { findBestInstructors, localInstructorMatch } from '../services/instructorSuggestion.js';
 import Tutor from '../models/Tutor.js'; // ✅ must include .js
 
 
 const router = express.Router();
+//instructor
+router.get('/instructors', getInstructors);
+
 
 // User Routes
 router.post('/users', createUser);
@@ -38,7 +47,30 @@ router.get('/tutors/:id', async (req, res) => {
 // 
 
 
-// AI Routes
+// Tutor routes
+router.get('/tutors', async (req, res) => {
+  try {
+    const tutors = await Tutor.find();
+    res.json(tutors);
+  } catch (err) {
+    res.status(500).json({ error: 'Server Error' });
+  }
+});
+// get individual tutor
+router.get('/tutors/:id', async (req, res) => {
+  try {
+    const tutor = await Tutor.findById(req.params.id);
+    if (!tutor) return res.status(404).json({ error: 'Tutor not found' });
+    res.json(tutor);
+  } catch (err) {
+    res.status(500).json({ error: 'Server Error' });
+  }
+});
+
+// 
+
+
+// Gemini AI Routes
 router.post('/ai/mentor', async (req, res) => {
   const { skill, level, availability } = req.body;
   const prompt = `I want to learn ${skill}. I am at ${level} level. I am available ${availability}. Suggest the best student mentors from a student pool who match my needs.`;
@@ -60,6 +92,48 @@ router.post('/ai/book', async (req, res) => {
     res.json({ response: result });
   } catch (err) {
     res.status(500).json({ error: 'AI request failed' });
+  }
+});
+
+router.post('/ai/book-chat', async (req, res) => {
+  const { conversation } = req.body;
+  try {
+    const result = await askGeminiChat(conversation);
+    res.json({ response: result });
+  } catch (err) {
+    res.status(500).json({ error: 'AI chat request failed' });
+  }
+});
+
+// Groq Chatbot Route
+//chatbot basic question
+router.post('/chatbot', chatHandler);
+
+// Instructor Suggestion Routes
+router.post('/match', async (req, res) => {
+  try {
+    const studentData = req.body;
+    
+    // Get AI recommendations
+    const result = await findBestInstructors(studentData);
+    
+    res.json({
+      success: true,
+      analysis: result.analysis,
+      recommendations: result.recommendations,
+      reasons: result.reasons,
+      tips: result.tips
+    });
+  } catch (error) {
+    console.error('Mentor matching error:', error);
+    // Fallback to local matching if AI fails
+    const recommendations = localInstructorMatch(req.body);
+    res.json({
+      success: false,
+      message: 'AI service unavailable, showing local results',
+      recommendations,
+      isFallback: true
+    });
   }
 });
 

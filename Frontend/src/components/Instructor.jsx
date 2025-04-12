@@ -1,39 +1,44 @@
+// Instructor.jsx
 import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
-import { InstructorProvider } from "../context.jsx/InstructorContext";
-import { useContext } from "react";
-import { InstructorContext } from "../context.jsx/InstructorContext";
-import { useEffect } from "react";
-
-
+import { useNavigate, useLocation } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { InstructorContext } from "../context/InstructorContext";
 
 const InstructorsPage = () => {
-    const { instructors } = useContext(InstructorContext);
-    const [sortBy, setSortBy] = useState("");
-    const [searchTerm, setSearchTerm] = useState("");
-    const navigate = useNavigate();
-  
-    const sortInstructors = (list) => {
-      switch (sortBy) {
-        case "rating":
-          return [...list].sort((a, b) => b.rating - a.rating);
-        case "popularity":
-          return [...list].sort((a, b) => b.reviews - a.reviews);
-        case "alphabetical":
-          return [...list].sort((a, b) => a.name.localeCompare(b.name));
-        default:
-          return list;
-      }
-    };
-  
-    const filteredInstructors = sortInstructors(
-      instructors.filter((inst) =>
-        inst.skills.some((skill) =>
-          skill.toLowerCase().includes(searchTerm.toLowerCase())
-        )
+  const { instructors } = useContext(InstructorContext);
+  const [sortBy, setSortBy] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Check if recommended list is passed via state
+  const recommendedList = location.state?.recommendedList;
+
+  // Use recommended list if available, otherwise use all instructors
+  const baseList = recommendedList || instructors;
+
+  const sortInstructors = (list) => {
+    switch (sortBy) {
+      case "rating":
+        return [...list].sort((a, b) => b.rating - a.rating);
+      case "popularity":
+        return [...list].sort((a, b) => b.reviews - a.reviews);
+      case "alphabetical":
+        return [...list].sort((a, b) => a.name.localeCompare(b.name));
+      default:
+        return list;
+    }
+  };
+
+  const filteredInstructors = sortInstructors(
+    baseList.filter((inst) =>
+      inst.skills.some((skill) =>
+        skill.toLowerCase().includes(searchTerm.toLowerCase())
       )
-    );
+    )
+  );
+
   return (
     <div className="bg-white">
       {/* Hero Section */}
@@ -44,7 +49,9 @@ const InstructorsPage = () => {
         <p className="text-lg max-w-2xl mx-auto mb-8">
           Build skills with courses, certifications, and degrees online from world-class instructors and companies.
         </p>
-        
+        {recommendedList && (
+          <p className="text-green-200 text-sm">Showing your top matched mentors</p>
+        )}
       </div>
 
       {/* Instructors Section */}
@@ -130,7 +137,20 @@ const InstructorsPage = () => {
           ))}          
         </div>
       </section>
-    </div>
+      <div className="fixed bottom-6 right-6 z-50 flex flex-col items-center animate-bounce">
+  <img
+    onClick={() => window.open('http://localhost:5173/ai/mentor')}
+    src="/images/chatbot.png"
+    alt="AI Chatbot"
+    className="w-24 h-24 rounded-full shadow-lg cursor-pointer hover:scale-105 transition"
+    title="Need help?"
+  />
+  <span className="mt-2 text-black bg-pink-200 px-3 py-1 rounded-full text-sm shadow-md">
+    Find Mentor
+  </span>
+</div>
+
+</div>
   );
 };
 
